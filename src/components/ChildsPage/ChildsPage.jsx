@@ -10,6 +10,7 @@ import { actionChannel } from "redux-saga/effects";
 
 const ChildsPage = () => {
   const medication = useSelector((store) => store.medication);
+  const user = useSelector(store=>store.user);
   useEffect(() => {
     dispatch({
       type:'FETCH_MED',
@@ -165,8 +166,9 @@ const ChildsPage = () => {
               <th>Medication Name</th>
               <th>Dosage</th>
               <th>Time of Meds</th>
-              <th>Actions</th>
-            </tr>
+              
+            {user.role == 2&&<th>Actions</th>}
+            </tr> 
           </thead>
           <tbody>
             {medication?.map((medication) => (

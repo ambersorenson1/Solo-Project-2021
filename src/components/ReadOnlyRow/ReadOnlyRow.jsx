@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ReadOnlyRow = ({ medication, handleEditClick, handleDeleteClick }) => {
+const user = useSelector(store=>store.user);
   return (
     <tr>
       <td>{medication.medicationName}</td>
