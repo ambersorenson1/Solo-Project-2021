@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ChildsPage from '../ChildsPage/ChildsPage';
 
 import './App.css';
 
@@ -30,6 +31,8 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+
+
 
   return (
     <Router>
@@ -59,7 +62,11 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
-
+          <ProtectedRoute
+      path="/childsPage"
+          >
+            <ChildsPage />
+          </ProtectedRoute>
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -72,7 +79,7 @@ function App() {
             exact
             path="/login"
           >
-            {user.id ?
+            {user.user_id ?
               // If the user is already logged in, 
               // redirect to the /user page
               <Redirect to="/user" />
@@ -86,7 +93,7 @@ function App() {
             exact
             path="/registration"
           >
-            {user.id ?
+            {user.user_id ?
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />
@@ -100,7 +107,7 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
+            {user.user_id ?
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />

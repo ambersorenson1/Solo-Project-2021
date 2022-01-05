@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "medicationName": "Symbicort",
+    "dosage": "2 puffs twice a day",
+    "timeOfMeds": "Once in the AM(8) once in the PM(8)"
+  },
+  {
+    "id": 2,
+    "medicationName": "Zyrtec",
+    "dosage": "1 pill in the AM",
+    "timeOfMeds": "8 AM"
+  },
+  {
+    "id": 3,
+    "medicationName": "Flonase",
+    "dosage": "1 spray in each nostril",
+    "timeOfMeds": "8 AM"
+  }
+]
