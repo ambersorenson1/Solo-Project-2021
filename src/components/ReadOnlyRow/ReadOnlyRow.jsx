@@ -8,7 +8,7 @@ const user = useSelector(store=>store.user);
       <td>{medication.medicationName}</td>
       <td>{medication.dosage}</td>
       <td>{medication.timeOfMeds}</td>
-      {user.role == 2&& <td>
+      {user.role == 1&& <td>
         <button
           type="button"
           onClick={(event) => handleEditClick(event, medication)}

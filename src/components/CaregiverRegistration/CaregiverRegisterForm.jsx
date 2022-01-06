@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-function CaregiverRegisterForm() {
+export default function CaregiverRegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [adminRef, setAdminRef] = useState('');
@@ -18,75 +18,73 @@ function CaregiverRegisterForm() {
         payload: {
         username: username,
         password: password,
-        adminRef : "",
+        adminRef : adminRef,
         role: role,
   },
 });
-
-  
-  return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-  <div>
-        <label htmlFor="caregiver-username">
-          C-Username:
-          <input
-            type="text"
-            name="caregiver-username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="caregiverPassword">
-          Password:
-          <input
-            type="caregiverPassword"
-            name="caregiverPassword"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>  
-      <div>
-        <label htmlFor="adminRef">
-          Password:
-          <input
-            type="adminRef"
-            name="adminRef"
-            value={adminRef}
-            required
-            onChange={(event) => setAdminRef(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="role">
-          Role:
-          <input
-            type="number"
-            name="role"
-            min="1"
-            max="2"
-            value={role}
-            required
-            onChange={(event) => setRole(event.target.value)}
-          />
-        </label>
-      </div> 
-      <div>
-      <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
-  );
 }
-
-    export default CaregiverRegisterForm;
+return (
+  <form className="formPanel" onSubmit={registerUser}>
+    <h2>Register User</h2>
+    {errors.registrationMessage && (
+      <h3 className="alert" role="alert">
+        {errors.registrationMessage}
+      </h3>
+    )}
+<div>
+      <label htmlFor="caregiver-username">
+        C-Username:
+        <input
+          type="text"
+          name="caregiver-username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+        />
+      </label>
+    </div>
+    <div>
+      <label htmlFor="caregiverPassword">
+        Password:
+        <input
+          type="caregiverPassword"
+          name="caregiverPassword"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
+      </label>
+    </div>  
+    <div>
+      <label htmlFor="adminRef">
+        adminRef:
+        <input
+          type="adminRef"
+          name="adminRef"
+          value={adminRef}
+          required
+          onChange={(event) => setAdminRef(event.target.value)}
+        />
+      </label>
+    </div>
+    <div>
+      <label htmlFor="role">
+        Role:
+        <input
+          type="number"
+          name="role"
+          min="1"
+          max="2"
+          value={role}
+          required
+          onChange={(event) => setRole(event.target.value)}
+        />
+      </label>
+    </div> 
+    <div>
+    <input className="btn" type="submit" name="submit" value="Register" />
+    </div>
+  </form>
+);
+    
+    }

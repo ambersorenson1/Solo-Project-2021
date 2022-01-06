@@ -24,8 +24,9 @@ router.post('/register', (req, res, next) => {
   const adminRef = req.body.adminRef;
   let queryText;
   let queryValues;
+  console.log('check body',req.body)
   if (req.body.adminRef){
-     queryText = `INSERT INTO "public.user" (username, password, role,adminRef)
+     queryText = `INSERT INTO "public.user" (username, password, role, ref)
      VALUES ($1, $2, $3, $4) RETURNING user_id`;
      queryValues = [username, password, role, adminRef]
   }else{

@@ -157,7 +157,7 @@ const ChildsPage = () => {
     setMedications(newMedications);
   };
   const renderForm = ()=>{
-    if (user.role==2){
+    if (user.role==1){
       return(
         <div>
 
@@ -201,7 +201,7 @@ const ChildsPage = () => {
               <th>Dosage</th>
               <th>Time of Meds</th>
               
-            {user.role == 2&&<th>Actions</th>}
+            {user.role == 1&&<th>Actions</th>}
             </tr> 
           </thead>
           <tbody>

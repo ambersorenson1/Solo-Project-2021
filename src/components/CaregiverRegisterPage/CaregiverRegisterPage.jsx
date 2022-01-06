@@ -1,5 +1,5 @@
 import React from 'react';
-
+import CaregiverRegisterForm from '../CaregiverRegistration/CaregiverRegisterForm'
 import { useHistory } from 'react-router-dom';
 
 function CaregiverRegisterPage() {
