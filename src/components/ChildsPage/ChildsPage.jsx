@@ -96,6 +96,7 @@ const ChildsPage = () => {
       dosage: editFormData.dosage,
       timeOfMeds: editFormData.timeOfMeds,
     };
+    console.log('medsID', editedMedication);
     dispatch({
       type:'EDIT_MED',
       payload: editedMedication
@@ -123,26 +124,8 @@ const ChildsPage = () => {
     };
     setEditFormData(formValues);
   };
-  const handleSaveClick = (event) => {
-    event.preventDefault();
 
-    const savedMedication = {
-      id: editMedicationId,
-      medicationName: saveFormData.medicationName,
-      dosage: saveFormData.dosage,
-      timeOfMeds: saveFormData.timeOfMeds,
-    };
-
-    const newSavedMedications = [...medications];
-
-    const index = medications.findIndex((medication) => medication.id === editMedicationId);
-
-    newSavedMedications[index] = savedMedication;
-
-    setMedications(newSavedMedications);
-    setEditMedicationId(null);
-  };
-
+  
   const handleCancelClick = () => {
     setEditMedicationId(null);
   };

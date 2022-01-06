@@ -1,10 +1,14 @@
 const medicationReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MEDICATION':
-      return action.payload;
+      {
+      let prevState =[...state];
+      prevState = [...prevState, action.payload];
+      return prevState;
+      }
     case 'EDIT_MEDICATION':
-      
-      let prevState = [...state];
+      {
+        let prevState = [...state];
 
       prevState = prevState.map(meds =>{
         if(meds.meds_id === action.payload[0].meds_id)
@@ -14,6 +18,7 @@ const medicationReducer = (state = [], action) => {
         return meds;
      })
       return prevState;
+      }
     case 'SAVE_MEDICATION':
       return action.payload;
     case 'DELETE_MEDICATION':

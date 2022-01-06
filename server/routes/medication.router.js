@@ -51,7 +51,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   ];
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
-      res.sendStatus(201);
+      res.status(200).send({
+        medicationName:req.body.medicationName,
+        dosage:req.body.dosage,
+        timeOfMeds: req.body.timeOfMeds,
+        user_id: req.user.user_id
+      });
     })
     .catch((dbErr) => {
       console.error(dbErr);
@@ -72,6 +77,7 @@ console.log('body', req.body);
                         "dosage" = '${req.body.dosage}',
                         "timeOfMeds" = '${req.body.timeOfMeds}'
                         WHERE "meds_id" = '${id}' 
+
                       RETURNING *`;
           connection.query(query, function (error, results, fields) {
               if (error) throw error;

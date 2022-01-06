@@ -11,7 +11,7 @@ function* AddChildMedications(action) {
       url: '/api/medication',
       data: action.payload
     })
-    console.log(response.data)
+    console.log("lets see",response.data);
     yield put({
       type: 'ADD_MEDICATION',
       payload: response.data
