@@ -53,7 +53,21 @@ function RegisterForm() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-      </div>  
+      </div> 
+      <div>
+        <label htmlFor="role">
+          Password:
+          <input
+            type="number"
+            name="role"
+            min="1"
+            max="2"
+            value={role}
+            required
+            onChange={(event) => setRole(event.target.value)}
+          />
+        </label>
+      </div> 
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
