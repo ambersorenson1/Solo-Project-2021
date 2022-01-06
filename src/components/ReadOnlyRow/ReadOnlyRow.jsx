@@ -8,17 +8,18 @@ const user = useSelector(store=>store.user);
       <td>{medication.medicationName}</td>
       <td>{medication.dosage}</td>
       <td>{medication.timeOfMeds}</td>
-      <td>
+      {user.role == 2&& <td>
         <button
           type="button"
           onClick={(event) => handleEditClick(event, medication)}
         >
           Edit
+
         </button>
         <button type="button" onClick={() => handleDeleteClick(medication.id)}>
           Delete
         </button>
-      </td>
+      </td>}
     </tr>
   );
 };

@@ -156,6 +156,40 @@ const ChildsPage = () => {
 
     setMedications(newMedications);
   };
+  const renderForm = ()=>{
+    if (user.role==2){
+      return(
+        <div>
+
+        <h2>Add a Medication</h2>
+        <form onSubmit={handleAddFormSubmit}>
+          <input
+            type="text"
+            name="medicationName"
+            required="required"
+            placeholder="Enter a medication name..."
+            onChange={handleAddFormChange}
+            />
+          <input
+            type="text"
+            name="dosage"
+            required="required"
+            placeholder="Enter the dosage amount..."
+            onChange={handleAddFormChange}
+            />
+          <input
+            type="text"
+            name="timeOfMeds"
+            required="required"
+            placeholder="Enter time of medication..."
+            onChange={handleAddFormChange}
+            />
+          <button type="submit">Add</button>
+        </form>
+        </div>
+      )
+    }
+  }
 
   return (
     <div className="app-container">
@@ -193,31 +227,7 @@ const ChildsPage = () => {
         </table>
       </form>
 
-      <h2>Add a Medication</h2>
-      <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="medicationName"
-          required="required"
-          placeholder="Enter a medication name..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="dosage"
-          required="required"
-          placeholder="Enter the dosage amount..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="timeOfMeds"
-          required="required"
-          placeholder="Enter time of medication..."
-          onChange={handleAddFormChange}
-        />
-        <button type="submit">Add</button>
-      </form>
+    {renderForm()}
     </div>
   );
 };

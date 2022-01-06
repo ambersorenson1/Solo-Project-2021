@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ChildsPage from '../ChildsPage/ChildsPage';
 
 import './App.css';
+import CaregiverRegisterPage from '../CaregiverRegisterPage/CaregiverRegisterPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -63,7 +64,8 @@ function App() {
             <UserPage />
           </ProtectedRoute>
           <ProtectedRoute
-      path="/childsPage"
+            exact
+            path="/childsPage"
           >
             <ChildsPage />
           </ProtectedRoute>
@@ -101,6 +103,12 @@ function App() {
               // Otherwise, show the registration page
               <RegisterPage />
             }
+            <ProtectedRoute
+            exact
+            path="/caregiver-registration"
+          >
+            <CaregiverRegisterPage />
+          </ProtectedRoute>
           </Route>
 
           <Route
