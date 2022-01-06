@@ -89,4 +89,4 @@ function CaregiverRegisterForm() {
   );
 }
 
-      export default CaregiverRegisterForm;
+    export default CaregiverRegisterForm;

@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {Redirect} from "react-router-dom";
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const errors = useSelector((store) => store.errors);
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
+
+
 
     dispatch({
       type: 'REGISTER',
@@ -56,7 +60,7 @@ function RegisterForm() {
       </div> 
       <div>
         <label htmlFor="role">
-          Password:
+          Role:
           <input
             type="number"
             name="role"
@@ -71,6 +75,7 @@ function RegisterForm() {
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
+      {user.redirect && <Redirect to="/caregiver-registration"/>}
     </form>
   );
 }

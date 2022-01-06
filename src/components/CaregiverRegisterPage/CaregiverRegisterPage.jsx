@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useHistory } from 'react-router-dom';
-import CaregiverRegisterForm from '../CaregiverRegisterForm/CaregiverRegisterForm';
 
 function CaregiverRegisterPage() {
   const history = useHistory();
