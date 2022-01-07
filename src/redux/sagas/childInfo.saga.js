@@ -40,6 +40,24 @@ function* AddChildMedications(action) {
     }
 };
 
+function* DeleteChildMedications(action) {
+  try {
+    console.log('ACTION', action);
+    
+    const response = yield axios({
+      method: 'DELETE',
+      url: `/api/medication/${action.payload.id}`,
+      data: action.payload
+    })
+    yield put({ 
+      type: 'DELETE_MEDICATION', 
+      payload: response.data
+    });
+  } catch(err) {
+    console.error('DELETE MEDS ERROR', err)
+  }
+};
+
 function* SaveChildMedications(action) {
   try {
     console.log('ACTION', action);
@@ -50,7 +68,6 @@ function* SaveChildMedications(action) {
       data: action.payload
     })
     console.log(response.data)
-    // yield put({ type: 'EDIT_MEDICATION', payload: response});
   } catch(err) {
     console.error('SAVE MEDS ERROR', err)
   }
@@ -79,7 +96,8 @@ function* childsInfoSaga() {
   yield takeLatest('ADD_MED', AddChildMedications);
   yield takeLatest('FETCH_MED', fetchMedications);
   yield takeLatest('EDIT_MED', EditChildMedications);
-  yield takeLatest('SAVE_MED', SaveChildMedications)
+  yield takeLatest('SAVE_MED', SaveChildMedications);
+  yield takeLatest('DELETE_MED', DeleteChildMedications)
 }
 
 export default childsInfoSaga;

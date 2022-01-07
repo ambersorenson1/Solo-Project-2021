@@ -22,7 +22,15 @@ const medicationReducer = (state = [], action) => {
     case 'SAVE_MEDICATION':
       return action.payload;
     case 'DELETE_MEDICATION':
-      return action.payload;
+      {
+      // gett id from action payload, send it from the backend aswell done //
+
+      //filter the medicine which has the id that is matching to deleted id
+      let prevState = [...state]
+      prevState = prevState.filter((value)=>value.meds_id!=action.payload.id)
+      return prevState;
+      // return the filtered state
+      }
     case 'GET_MEDICATION':
       return action.payload;
     default:

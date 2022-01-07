@@ -125,19 +125,17 @@ const ChildsPage = () => {
     setEditFormData(formValues);
   };
 
-  
+
   const handleCancelClick = () => {
     setEditMedicationId(null);
   };
 
-  const handleDeleteClick = (medicationId) => {
-    const newMedications = [...medications];
-
-    const index = medications.findIndex((medication) => medication.id === medicationId);
-
-    newMedications.splice(index, 1);
-
-    setMedications(newMedications);
+  const handleDeleteClick = (medication) => {
+    let payload = {id: medication.meds_id}
+   dispatch({
+     type: 'DELETE_MED',
+     payload
+   })
   };
   const renderForm = ()=>{
     if (user.role==1){
@@ -195,7 +193,6 @@ const ChildsPage = () => {
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
                     handleCancelClick={handleCancelClick}
-                    // handleSaveClick={handleSaveClick}
                   />
                 ) : (
                   <ReadOnlyRow

@@ -16,7 +16,7 @@ const user = useSelector(store=>store.user);
           Edit
 
         </button>
-        <button type="button" onClick={() => handleDeleteClick(medication.id)}>
+        <button type="button" onClick={() => handleDeleteClick(medication)}>
           Delete
         </button>
       </td>}

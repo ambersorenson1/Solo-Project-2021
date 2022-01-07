@@ -7,17 +7,20 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('req.user', req.user);
   let queryText;
-  let queryValues;
+ 
 
   // Conditionally choose a SQL query, based on a user's role:
-  if (req.user.role === 'ADMIN') {
-    queryText = `SELECT * FROM "public.kids_medications";`;
-    queryValues = [];
-  } else {
-    queryText = `
-      SELECT * FROM "public.kids_medications"
-    `;
-    queryValues = [req.user.id]
+  if (req.user.role==1){
+     queryText = `select *
+                     FROM "public.kids_medications"
+                     WHERE "kids_id" = '${req.user.user_id}'
+                     `;
+                    }else{
+                      
+                       queryText = `select *
+                                       FROM "public.kids_medications"
+                                       WHERE "ref" = '${req.user.ref}'
+                                       `;
   }
 
   pool.query(queryText)
@@ -38,16 +41,17 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('user', req.user);
   const sqlText = `
     INSERT INTO "public.kids_medications"
-      ("medicationName", "dosage", "timeOfMeds", "kids_id" )
+      ("medicationName", "dosage", "timeOfMeds", "kids_id","ref" )
       VALUES
-      ($1, $2, $3, $4);
+      ($1, $2, $3, $4,$5);
   `;
   console.log('body',req.body)
   const sqlValues = [
     req.body.medicationName,
     req.body.dosage,
     req.body.timeOfMeds,
-    req.user.user_id
+    req.user.user_id,
+    req.user.username
   ];
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
@@ -91,6 +95,27 @@ console.log('body', req.body);
       });
   }
 });
+
+router.delete("/:id", rejectUnauthenticated, (req,res)=>{
+  try {
+    pool.connect((err, connection) => {
+        if (err) throw err;
+        let query = `DELETE
+                     FROM "public.kids_medications"
+                     WHERE "meds_id" = '${req.params.id}'`;
+        connection.query(query, function (error, results, fields) {
+            if (error) throw new Error(error? error : "Medicine does not exist");
+    
+           
+            res.status(200).send({message: "Medication was deleted successfully!",id:req.params.id});
+        });
+    });
+  } catch (err) {
+    res.status(500).send({
+        message: err.message || "Some error occurred."
+    });
+  }
+})
 
 
 
