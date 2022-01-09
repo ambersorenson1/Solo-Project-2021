@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 export default function CaregiverRegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [adminRef, setAdminRef] = useState('');
+  const user = useSelector((store) => store.user);
   const [role, setRole] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -19,7 +21,8 @@ export default function CaregiverRegisterForm() {
         username: username,
         password: password,
         adminRef : adminRef,
-        role: role,
+        role: "2",
+        isAdmin:false,
   },
 });
 }
@@ -68,22 +71,9 @@ return (
       </label>
     </div>
     <div>
-      <label htmlFor="role">
-        Role:
-        <input
-          type="number"
-          name="role"
-          min="1"
-          max="2"
-          value={role}
-          required
-          onChange={(event) => setRole(event.target.value)}
-        />
-      </label>
-    </div> 
-    <div>
     <input className="btn" type="submit" name="submit" value="Register" />
     </div>
+    {user.redirect && <Redirect to="/admin-registration"/>}
   </form>
 );
     

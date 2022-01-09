@@ -7,7 +7,7 @@ const userReducer = (state = {}, action) => {
       break;
     case 'REGISTER_ADMIN':{
       let prevState ={...state};
-      if (action.payload.isAdmin){
+      if (!action.payload.isAdmin){
         prevState.redirect = true;
         return prevState;
       }

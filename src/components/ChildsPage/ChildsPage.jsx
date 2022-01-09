@@ -2,13 +2,11 @@ import React, { useState,Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 
-import data from "../../mock-data.json";
 import ReadOnlyRow from "../ReadOnlyRow/ReadOnlyRow";
 import EditableRow from "../EditableRow/EditableRow";
 import { useEffect } from "react";
-import { actionChannel } from "redux-saga/effects";
 
-const ChildsPage = () => {
+const ChildsPage = ()=>{
   const medication = useSelector((store) => store.medication);
   const user = useSelector(store=>store.user);
   useEffect(() => {
@@ -17,6 +15,7 @@ const ChildsPage = () => {
     })
   }, []);
   const [medications, setMedications] = useState(medication);
+  const [newChild, setNewChild] = useState("");
   const dispatch = useDispatch();
   const [addFormData, setAddFormData] = useState({
     medicationName: "",
@@ -25,11 +24,6 @@ const ChildsPage = () => {
   });
 
   const [editFormData, setEditFormData] = useState({
-    medicationName: "",
-    dosage: "",
-    timeOfMeds: "",
-  });
-  const [saveFormData, setSaveFormData] = useState({
     medicationName: "",
     dosage: "",
     timeOfMeds: "",
@@ -51,11 +45,6 @@ const ChildsPage = () => {
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
-    // dispatch({
-    //   type: 'EDIT_MED',
-    //   id: 7,
-    //   payload: 'h
-    // })
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
@@ -83,9 +72,30 @@ const ChildsPage = () => {
         timeOfMeds: addFormData.timeOfMeds,
      }
     })
+  }
+    
 
-    const newMedications = [...medications, newMedication];
-    setMedications(newMedications);
+    const handleAddChildInfoSubmit = (event) => {
+      event.preventDefault();
+  
+      const newKid = {
+        childsName: addFormData.childsName,
+        diagnosis: addFormData.diagnosis,
+        currentSymptoms: addFormData.currentSymptoms,
+      };
+  
+      dispatch({
+        type:"ADD_CHILD",
+        payload:{
+          childsName: addFormData.childsName,
+        diagnosis: addFormData.diagnosis,
+        currentSymptoms: addFormData.currentSymptoms,
+       }
+      })
+  
+
+    const newChildren = [...newChild, newKiddo];
+    setMedications(newKiddo);
   };
 
   const handleEditFormSubmit = (event) => {
@@ -102,10 +112,6 @@ const ChildsPage = () => {
       payload: editedMedication
     })
     const newMedications = [...medications];
-
-    const index = medications.findIndex((medication) => medication.meds_id === editMedicationId);
-
-    newMedications[index] = editedMedication;
 
     setMedications(newMedications);
     setEditMedicationId(null);
@@ -140,76 +146,107 @@ const ChildsPage = () => {
   const renderForm = ()=>{
     if (user.role==1){
       return(
+        <><div>
+            <h2>Add Child's Information</h2>
+            <form onSubmit={handleAddChildInfoSubmit}>
+            <input
+              type="text"
+              name="ChildsName"
+              required="required"
+              placeholder="Enter child's name..."
+              onChange={handleAddChildInfoSubmit} />
+            <input
+              type="text"
+              name="Diagnosis"
+              required="required"
+              placeholder="Enter child's diagnosis..."
+              onChange={handleAddChildInfoSubmit} />
+            <input
+              type="text"
+              name="currentSymptoms"
+              required="required"
+              placeholder="Enter any current symptoms..."
+              onChange={handleAddChildInfoSubmit} />
+            <button type="submit">Add</button>
+          </form>
+        </div>
         <div>
 
-        <h2>Add a Medication</h2>
-        <form onSubmit={handleAddFormSubmit}>
-          <input
-            type="text"
-            name="medicationName"
-            required="required"
-            placeholder="Enter a medication name..."
-            onChange={handleAddFormChange}
-            />
-          <input
-            type="text"
-            name="dosage"
-            required="required"
-            placeholder="Enter the dosage amount..."
-            onChange={handleAddFormChange}
-            />
-          <input
-            type="text"
-            name="timeOfMeds"
-            required="required"
-            placeholder="Enter time of medication..."
-            onChange={handleAddFormChange}
-            />
-          <button type="submit">Add</button>
-        </form>
-        </div>
+            <h2>Add a Medication</h2>
+            <form onSubmit={handleAddFormSubmit}>
+              <input
+                type="text"
+                name="medicationName"
+                required="required"
+                placeholder="Enter a medication name..."
+                onChange={handleAddFormChange} />
+              <input
+                type="text"
+                name="dosage"
+                required="required"
+                placeholder="Enter the dosage amount..."
+                onChange={handleAddFormChange} />
+              <input
+                type="text"
+                name="timeOfMeds"
+                required="required"
+                placeholder="Enter time of medication..."
+                onChange={handleAddFormChange} />
+              <button type="submit">Add</button>
+            </form>
+          </div></>
       )
     }
+  
+
+  
+}
+
+return (
+  <div className="app-container">
+    <form onSubmit={handleEditFormSubmit}>
+      <table>
+      <thead>
+          <tr>
+            <th>Child's Name</th>
+            <th>Diagnosis</th>
+            <th>Symptoms</th>
+          </tr>
+      </thead>
+        <thead>
+          <tr>
+            <th>Medication Name</th>
+            <th>Dosage</th>
+            <th>Time of Meds</th>
+            
+          {user.role == 1&&<th>Actions</th>}
+          </tr> 
+        </thead>
+        <tbody>
+          {medication?.map((medication) => (
+            <Fragment>
+              {editMedicationId === medication.meds_id ? (
+                <EditableRow
+                  editFormData={editFormData}
+                  handleEditFormChange={handleEditFormChange}
+                  handleCancelClick={handleCancelClick}
+                />
+              ) : (
+                <ReadOnlyRow
+                  medication={medication}
+                  handleEditClick={handleEditClick}
+                  handleDeleteClick={handleDeleteClick}
+                />
+              )}
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
+    </form>
+
+  {renderForm()}
+  </div>
+);
   }
-
-  return (
-    <div className="app-container">
-      <form onSubmit={handleEditFormSubmit}>
-        <table>
-          <thead>
-            <tr>
-              <th>Medication Name</th>
-              <th>Dosage</th>
-              <th>Time of Meds</th>
-              
-            {user.role == 1&&<th>Actions</th>}
-            </tr> 
-          </thead>
-          <tbody>
-            {medication?.map((medication) => (
-              <Fragment>
-                {editMedicationId === medication.meds_id ? (
-                  <EditableRow
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    medication={medication}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </Fragment>
-            ))}
-          </tbody>
-        </table>
-      </form>
-
-    {renderForm()}
-    </div>
-  );
-};
 
 export default ChildsPage;

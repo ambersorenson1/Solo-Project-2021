@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Redirect} from "react-router-dom";
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
   const errors = useSelector((store) => store.errors);
-  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
@@ -20,8 +17,7 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
-        adminRef : "",
-        role: role,
+        role: "1",
       },
     });
   }; // end registerUser
@@ -58,24 +54,10 @@ function RegisterForm() {
           />
         </label>
       </div> 
-      <div>
-        <label htmlFor="role">
-          Role:
-          <input
-            type="number"
-            name="role"
-            min="1"
-            max="2"
-            value={role}
-            required
-            onChange={(event) => setRole(event.target.value)}
-          />
-        </label>
-      </div> 
+      
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
-      {user.redirect && <Redirect to="/caregiver-registration"/>}
     </form>
   );
 }

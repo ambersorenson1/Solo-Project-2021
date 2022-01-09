@@ -77,9 +77,13 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
           <Route
-            path="/caregiver-registration"
+            path="/admin-registration"
           >
-            <CaregiverRegisterPage />
+           {
+             user.user_id?
+             <Redirect to="/user"/> :
+             <RegisterPage/>
+           }
           </Route>
           <Route
             exact
@@ -105,7 +109,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the registration page
-              <RegisterPage />
+              <CaregiverRegisterPage />
             }
           </Route>
 
