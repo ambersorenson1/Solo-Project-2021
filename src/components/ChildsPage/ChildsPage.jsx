@@ -9,6 +9,9 @@ import { useEffect } from "react";
 const ChildsPage = ()=>{
   const medication = useSelector((store) => store.medication);
   const user = useSelector(store=>store.user);
+  const [currentSymptoms,setSymptoms] = useState("");
+  const [childsName,setChildName] = useState("");
+  const [diagnosis,setDiagnosis] = useState("");
   useEffect(() => {
     dispatch({
       type:'FETCH_MED',
@@ -57,13 +60,6 @@ const ChildsPage = ()=>{
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
 
-    const newMedication = {
-      id: nanoid(),
-      medicationName: addFormData.medicationName,
-      dosage: addFormData.dosage,
-      timeOfMeds: addFormData.timeOfMeds,
-    };
-
     dispatch({
       type:"ADD_MED",
       payload:{
@@ -78,24 +74,15 @@ const ChildsPage = ()=>{
     const handleAddChildInfoSubmit = (event) => {
       event.preventDefault();
   
-      const newKid = {
-        childsName: addFormData.childsName,
-        diagnosis: addFormData.diagnosis,
-        currentSymptoms: addFormData.currentSymptoms,
-      };
-  
       dispatch({
         type:"ADD_CHILD",
         payload:{
-          childsName: addFormData.childsName,
-        diagnosis: addFormData.diagnosis,
-        currentSymptoms: addFormData.currentSymptoms,
+        childsName,
+        diagnosis,
+        currentSymptoms,  
        }
       })
   
-
-    const newChildren = [...newChild, newKiddo];
-    setMedications(newKiddo);
   };
 
   const handleEditFormSubmit = (event) => {
@@ -157,19 +144,22 @@ const ChildsPage = ()=>{
               name="ChildsName"
               required="required"
               placeholder="Enter child's name..."
-              onChange={handleAddChildInfoSubmit} />
+              value={childsName}
+              onChange={(e)=>setChildName(e.target.value)} />
             <input
               type="text"
               name="Diagnosis"
+              value={diagnosis}
               required="required"
               placeholder="Enter child's diagnosis..."
-              onChange={handleAddChildInfoSubmit} />
+              onChange={(e)=>setDiagnosis(e.target.value)} />
             <input
               type="text"
               name="currentSymptoms"
               required="required"
+              value={currentSymptoms}
               placeholder="Enter any current symptoms..."
-              onChange={handleAddChildInfoSubmit} />
+              onChange={(e)=>setSymptoms(e.target.value)} />
             <button type="submit">Add</button>
           </form>
         </div>

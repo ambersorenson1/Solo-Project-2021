@@ -21,6 +21,24 @@ function* AddChildMedications(action) {
   }
 };
 
+function* AddChild(action) {
+  try {
+    console.log('action',action)
+    const response = yield axios({
+      method: 'POST',
+      url: '/api/children',
+      data: action.payload
+    })
+    console.log("lets see",response.data);
+    yield put({
+      type: 'ADD_CHILDREN',
+      payload: response.data
+    })
+  } catch(err) {
+    console.error('ADD ERROR', err)
+  }
+};
+
   function* EditChildMedications(action) {
     try {
       console.log('ACTION', action);
@@ -94,6 +112,7 @@ function* fetchMedications(action) {
 
 function* childsInfoSaga() {
   yield takeLatest('ADD_MED', AddChildMedications);
+  yield takeLatest('ADD_CHILD', AddChild);
   yield takeLatest('FETCH_MED', fetchMedications);
   yield takeLatest('EDIT_MED', EditChildMedications);
   yield takeLatest('SAVE_MED', SaveChildMedications);
