@@ -50,7 +50,7 @@ return (
       <label htmlFor="caregiverPassword">
         Password:
         <input
-          type="caregiverPassword"
+          type="password"
           name="caregiverPassword"
           value={password}
           required
