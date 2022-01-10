@@ -7,7 +7,6 @@ export default function CaregiverRegisterForm() {
   const [password, setPassword] = useState('');
   const [adminRef, setAdminRef] = useState('');
   const user = useSelector((store) => store.user);
-  const [role, setRole] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
   

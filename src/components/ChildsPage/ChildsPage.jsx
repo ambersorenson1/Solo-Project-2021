@@ -112,6 +112,9 @@ const ChildsPage = ()=>{
       payload: editedMedication
     })
     const newMedications = [...medications];
+    const index = medications.findIndex((medication) => medication.meds_id === editMedicationId);
+
+    newMedications[index] = editedMedication;
 
     setMedications(newMedications);
     setEditMedicationId(null);

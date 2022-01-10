@@ -81,7 +81,7 @@ function App() {
           >
            {
              user.user_id?
-             <Redirect to="/user"/> :
+             <Redirect to="/childsPage"/> :
              <RegisterPage/>
            }
           </Route>
