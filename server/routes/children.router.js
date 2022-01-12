@@ -13,7 +13,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   if (req.user.role==1){
      queryText = `select *
                      FROM "public.kids"
-                     WHERE "kids_id" = '${req.user.user_id}'
+                     WHERE "ref" = '${req.user.username}'
                      `;
                     }else{
                       
@@ -82,10 +82,10 @@ console.log('body', req.body);
           if (err) throw err;
           let id = req.params.id;
           let query = `update "public.kids"
-                        set "childsName" = '${req.body.childName}',
+                        set "childsName" = '${req.body.childsName}',
                         "diagnosis" = '${req.body.diagnosis}',
                         "currentSymptoms" = '${req.body.currentSymptoms}'
-                        WHERE "meds_id" = '${id}' 
+                        WHERE "id" = '${req.params.id}' 
 
                       RETURNING *`;
           connection.query(query, function (error, results, fields) {

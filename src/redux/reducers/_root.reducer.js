@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import medication from './medication.reducer';
+import child from './childInfo.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -12,7 +13,8 @@ import medication from './medication.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
-  medication, // will have an id and username if someone is logged in
+  medication, 
+  child, // will have an id and username if someone is logged in
 });
 
 export default rootReducer;

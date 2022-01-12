@@ -1,4 +1,4 @@
-import React, { useState,Fragment } from "react";
+import React, { useState,Fragment, Children } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 const ChildsPage = ()=>{
   const medication = useSelector((store) => store.medication);
+  const child = useSelector((store) => store.child);
   const user = useSelector(store=>store.user);
   const [currentSymptoms,setSymptoms] = useState("");
   const [childsName,setChildName] = useState("");
@@ -16,7 +17,18 @@ const ChildsPage = ()=>{
     dispatch({
       type:'FETCH_MED',
     })
+    dispatch({
+      type:'FETCH_KID',
+    })
+   
   }, []);
+  useEffect(()=>{
+    if(child.child.length){
+      setChildName(child.child[0].childsName)
+      setDiagnosis(child.child[0].diagnosis)
+      setSymptoms(child.child[0].currentSymptoms)
+    }
+  },[child])
   const [medications, setMedications] = useState(medication);
   const [newChild, setNewChild] = useState("");
   const dispatch = useDispatch();
@@ -73,16 +85,30 @@ const ChildsPage = ()=>{
 
     const handleAddChildInfoSubmit = (event) => {
       event.preventDefault();
-  
-      dispatch({
-        type:"ADD_CHILD",
-        payload:{
-        childsName,
-        diagnosis,
-        currentSymptoms,  
-       }
-      })
-  
+     
+        dispatch({
+          type:'ADD_KID',
+          payload:{
+          childsName,
+          diagnosis,
+          currentSymptoms,  
+         }
+        })
+    
+  };
+    const handleUpdateChildInfoSubmit = (event) => {
+      event.preventDefault();
+     
+        dispatch({
+          type:'UPDATE_KID',
+          payload:{
+          childsName,
+          diagnosis,
+          currentSymptoms,  
+          id:child.child[0].id
+         }
+        })
+    
   };
 
   const handleEditFormSubmit = (event) => {
@@ -134,12 +160,19 @@ const ChildsPage = ()=>{
    })
   };
   const renderForm = ()=>{
-    if (user.role==1){
+    if(
+      child.loading
+    ){
+      return "loading"
+    }
+    if (user.role==1 && !child.child.length){
+      
       return(
         <><div>
             <h2>Add Child's Information</h2>
-            <form onSubmit={handleAddChildInfoSubmit}>
+            <form onSubmit={(e)=>handleAddChildInfoSubmit(e,true)}>
             <input
+              
               type="text"
               name="ChildsName"
               required="required"
@@ -164,55 +197,102 @@ const ChildsPage = ()=>{
           </form>
         </div>
         <div>
-
-            <h2>Add a Medication</h2>
-            <form onSubmit={handleAddFormSubmit}>
-              <input
-                type="text"
-                name="medicationName"
-                required="required"
-                placeholder="Enter a medication name..."
-                onChange={handleAddFormChange} />
-              <input
-                type="text"
-                name="dosage"
-                required="required"
-                placeholder="Enter the dosage amount..."
-                onChange={handleAddFormChange} />
-              <input
-                type="text"
-                name="timeOfMeds"
-                required="required"
-                placeholder="Enter time of medication..."
-                onChange={handleAddFormChange} />
-              <button type="submit">Add</button>
-            </form>
-          </div></>
+        </div></>
       )
+    }else if(user.role==1 && child.child.length){
+  console.log('child',child.child[0].childsName)
+    return(
+
+      <><div>
+      <h2>Update Child's Information</h2>
+      <form onSubmit={handleUpdateChildInfoSubmit}>
+      <input
+        defaultValue={child.child[0].childsName}
+        type="text"
+        name="ChildsName"
+        required="required"
+        placeholder="Enter child's name..."
+        value={childsName}
+        onChange={(e)=>setChildName(e.target.value)} />
+      <input
+        defaultValue={child.child[0].diagnosis}
+        type="text"
+        name="Diagnosis"
+        value={diagnosis}
+        required="required"
+        placeholder="Enter child's diagnosis..."
+        onChange={(e)=>setDiagnosis(e.target.value)} />
+      <input
+       defaultValue={child.child[0].currentSymptoms}
+        type="text"
+        name="currentSymptoms"
+        required="required"
+        value={currentSymptoms}
+        placeholder="Enter any current symptoms..."
+        onChange={(e)=>setSymptoms(e.target.value)} />
+      <button type="submit">Update</button>
+    </form>
+  </div>
+  <div>
+  </div></>
+    )
     }
-  
-
-  
 }
+const addMedication = ()=>{
+  if (user.role==1){
+    return(
+      <div><h2>Add a Medication</h2>
+      <form onSubmit={handleAddFormSubmit}>
+        <input
+          type="text"
+          name="medicationName"
+          required="required"
+          placeholder="Enter a medication name..."
+          onChange={handleAddFormChange} />
+        <input
+          type="text"
+          name="dosage"
+          required="required"
+          placeholder="Enter the dosage amount..."
+          onChange={handleAddFormChange} />
+        <input
+          type="text"
+          name="timeOfMeds"
+          required="required"
+          placeholder="Enter time of medication..."
+          onChange={handleAddFormChange} />
+        <button type="submit">Add</button>
+      </form>
+      </div>
+    )
+  }
+}
+const childInfo = ()=>{
+  if (!child.loading && child.child.length){
+  
+   return(
+     <><h1>Child's Name {child.child[0].childsName}
+       
+       </h1><h1>Diagnosis {child.child[0].diagnosis}</h1><h1>Symptoms {child.child[0].currentSymptoms}</h1></>
 
+   )
+    
+
+  }
+}
 return (
   <div className="app-container">
+    {childInfo()}
     <form onSubmit={handleEditFormSubmit}>
       <table>
-      <thead>
-          <tr>
-            <th>Child's Name</th>
-            <th>Diagnosis</th>
-            <th>Symptoms</th>
-          </tr>
-      </thead>
+     
         <thead>
           <tr>
             <th>Medication Name</th>
             <th>Dosage</th>
             <th>Time of Meds</th>
             
-          {user.role == 1&&<th>Actions</th>}
+        
           </tr> 
         </thead>
         <tbody>
@@ -236,8 +316,8 @@ return (
         </tbody>
       </table>
     </form>
-
   {renderForm()}
+                {addMedication()}
   </div>
 );
   }

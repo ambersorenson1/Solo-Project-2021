@@ -30,6 +30,9 @@ function* AddChild(action) {
       data: action.payload
     })
     console.log("lets see",response.data);
+    yield({
+      type:"FETCH_KID"
+    })
     yield put({
       type: 'ADD_CHILDREN',
       payload: response.data
@@ -91,6 +94,21 @@ function* SaveChildMedications(action) {
   }
 };
 
+function* UpdateChild(action) {
+  try {
+    console.log('ACTION', action);
+    
+    const response = yield axios({
+      method: 'PUT',
+      url: `/api/children/${action.payload.id}`,
+      data: action.payload
+    })
+   alert("child updated");
+  } catch(err) {
+    console.error('UPDATE CHILD ERROR', err)
+  }
+};
+
 
 function* fetchMedications(action) {
   try {
@@ -109,14 +127,33 @@ function* fetchMedications(action) {
   }
 };
 
+function* fetchKids(action) {
+  try {
+    console.log('action',action)
+    const response = yield axios({
+      method: 'GET',
+      url: '/api/children',
+    })
+    console.log('*****************', response.data)
+    yield put({
+      type: 'SET_CHILD_INFO',
+      payload: response.data
+    })
+  } catch(err) {
+    console.error('ADD error', err)
+  }
+};
+
 
 function* childsInfoSaga() {
   yield takeLatest('ADD_MED', AddChildMedications);
   yield takeLatest('ADD_CHILD', AddChild);
-  yield takeLatest('FETCH_MED', fetchMedications);
+  yield takeLatest('FETCH_KID', fetchMedications);
+  yield takeLatest('FETCH_MED', fetchKids);
   yield takeLatest('EDIT_MED', EditChildMedications);
   yield takeLatest('SAVE_MED', SaveChildMedications);
-  yield takeLatest('DELETE_MED', DeleteChildMedications)
+  yield takeLatest('DELETE_MED', DeleteChildMedications);
+  yield takeLatest('UPDATE_KID', UpdateChild);
 }
 
 export default childsInfoSaga;
