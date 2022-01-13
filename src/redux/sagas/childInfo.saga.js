@@ -22,6 +22,7 @@ function* AddChildMedications(action) {
 };
 
 function* AddChild(action) {
+  console.log('add child worked')
   try {
     console.log('action',action)
     const response = yield axios({
@@ -30,9 +31,7 @@ function* AddChild(action) {
       data: action.payload
     })
     console.log("lets see",response.data);
-    yield({
-      type:"FETCH_KID"
-    })
+   
     yield put({
       type: 'SET_CHILD_INFO',
       payload: response.data
@@ -103,7 +102,8 @@ function* UpdateChild(action) {
       url: `/api/children/${action.payload.id}`,
       data: action.payload
     })
-   alert("child updated");
+
+   console.log("child updated",response.data);
   } catch(err) {
     console.error('UPDATE CHILD ERROR', err)
   }

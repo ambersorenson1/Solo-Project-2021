@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const ChildsPage = ()=>{
   const medication = useSelector((store) => store.medication);
   const child = useSelector((store) => store.child);
+  const [change, setChange] = useState(false);
   const user = useSelector(store=>store.user);
   const [currentSymptoms,setSymptoms] = useState("");
   const [childsName,setChildName] = useState("");
@@ -21,7 +22,7 @@ const ChildsPage = ()=>{
       type:'FETCH_KID',
     })
    
-  }, []);
+  }, [change]);
   useEffect(()=>{
     if(child.child.length){
       setChildName(child.child[0].childsName)
@@ -83,10 +84,9 @@ const ChildsPage = ()=>{
     
 
     const handleAddChildInfoSubmit = (event) => {
-      console.log('check*********', handleUpdateChildInfoSubmit);
       event.preventDefault();
         dispatch({
-          type:'ADD_KID',
+          type:'ADD_CHILD',
           payload:{
           childsName,
           diagnosis,
@@ -94,6 +94,7 @@ const ChildsPage = ()=>{
          }
         })
     
+        setChange(prev=>!prev);
   };
     const handleUpdateChildInfoSubmit = (event) => {
       event.preventDefault();
@@ -107,7 +108,7 @@ const ChildsPage = ()=>{
           id:child.child[0].id
          }
         })
-    
+    setChange(prev=>!prev)
   };
 
   const handleEditFormSubmit = (event) => {
