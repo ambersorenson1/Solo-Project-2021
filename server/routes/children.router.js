@@ -74,7 +74,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/:id',rejectUnauthenticated, async (req, res) => {console.log('params',req.params)
-console.log('body', req.body);
+console.log('body************', req.body);
 
 
   try {

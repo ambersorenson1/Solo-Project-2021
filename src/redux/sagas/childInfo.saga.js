@@ -34,7 +34,7 @@ function* AddChild(action) {
       type:"FETCH_KID"
     })
     yield put({
-      type: 'ADD_CHILDREN',
+      type: 'SET_CHILD_INFO',
       payload: response.data
     })
   } catch(err) {

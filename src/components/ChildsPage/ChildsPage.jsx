@@ -30,7 +30,6 @@ const ChildsPage = ()=>{
     }
   },[child])
   const [medications, setMedications] = useState(medication);
-  const [newChild, setNewChild] = useState("");
   const dispatch = useDispatch();
   const [addFormData, setAddFormData] = useState({
     medicationName: "",
@@ -84,8 +83,8 @@ const ChildsPage = ()=>{
     
 
     const handleAddChildInfoSubmit = (event) => {
+      console.log('check*********', handleUpdateChildInfoSubmit);
       event.preventDefault();
-     
         dispatch({
           type:'ADD_KID',
           payload:{
