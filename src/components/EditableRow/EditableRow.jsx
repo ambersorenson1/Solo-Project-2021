@@ -2,7 +2,7 @@ import React from "react";
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import SaveIcon from '@material-ui/icons/Save'
-import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 
 const EditableRow = ({
   editFormData,
@@ -52,7 +52,7 @@ const EditableRow = ({
           Save
         </Button>
         <Button 
-        startIcon={<CancelPresentationIcon />}
+        startIcon={<CancelPresentationOutlinedIcon />}
         variant="outlined" color="error" onClick={handleCancelClick}>Cancel</Button>
       </td>
     </Box>

@@ -14,6 +14,7 @@ const ChildsPage = ()=>{
   const [change, setChange] = useState(false);
   const user = useSelector(store=>store.user);
   const [currentSymptoms,setSymptoms] = useState("");
+  const [value, setValue] = React.useState(new Date('2022-01-13T00:00:00.000Z'));
   const [childsName,setChildName] = useState("");
   const [diagnosis,setDiagnosis] = useState("");
   useEffect(() => {
@@ -208,7 +209,7 @@ const ChildsPage = ()=>{
       <><div>
       <h2>Update Child's Information</h2>
       <form onSubmit={handleUpdateChildInfoSubmit}>
-        <Grid container spacing={2}>        
+        <Grid container spacing={1}>        
           <Grid item xs={3}>
             <TextField
                 defaultValue={child.child[0].childsName}
@@ -259,29 +260,50 @@ const ChildsPage = ()=>{
     )
     }
 }
+
 const addMedication = ()=>{
   if (user.role==1){
     return(
       <div><h2>Add a Medication</h2>
       <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="medicationName"
-          required="required"
-          placeholder="Enter a medication name..."
-          onChange={handleAddFormChange} />
-        <input
-          type="text"
-          name="dosage"
-          required="required"
-          placeholder="Enter the dosage amount..."
-          onChange={handleAddFormChange} />
-        <input
-          type="text"
-          name="timeOfMeds"
-          required="required"
-          placeholder="Enter time of medication..."
-          onChange={handleAddFormChange} />
+      <Grid container spacing={1}> 
+      <Grid item xs={4}>
+            <TextField
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="outlined"
+                type='text'
+                label='Enter a medication name...' 
+                onChange={handleAddFormChange}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="outlined"
+                type='text'
+                label='Enter the dosage amount...' 
+                onChange={handleAddFormChange}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="outlined"
+                type='time'
+                label='Enter time of medication...' 
+                onChange={handleAddFormChange}
+            />
+          </Grid>
+          </Grid>
         <Button variant = "contained" color="primary" type="submit">Add</Button>
       </form>
       </div>
