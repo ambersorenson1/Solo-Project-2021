@@ -1,6 +1,5 @@
 import React from "react";
 import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
 import SaveIcon from '@material-ui/icons/Save'
 import CancelPresentationOutlinedIcon from '@material-ui/icons/CancelPresentationOutlined';
 
@@ -10,9 +9,7 @@ const EditableRow = ({
   handleCancelClick,
 }) => {
   return (
-    <Box
-      height={800}
-    >
+    <tr>
       <td>
         <input
           type="text"
@@ -44,18 +41,18 @@ const EditableRow = ({
         ></input>
       </td>
       <td>
-        <Button 
-        startIcon={<SaveIcon />}
-        variant = "contained" 
-        color="primary" 
-        type="submit">
-          Save
-        </Button>
-        <Button 
-        startIcon={<CancelPresentationOutlinedIcon />}
-        variant="outlined" color="error" onClick={handleCancelClick}>Cancel</Button>
+      <Button 
+              startIcon={<SaveIcon />}
+              variant = "contained" 
+              color="primary" 
+              type="submit">
+                Save
+              </Button>
+              <Button 
+              startIcon={<CancelPresentationOutlinedIcon />}
+              variant="contained" color="secondary" onClick={handleCancelClick}>Cancel</Button>
       </td>
-    </Box>
+    </tr>
   );
 };
 

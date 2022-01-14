@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import './ChildsPage.css';
 
 import ReadOnlyRow from "../ReadOnlyRow/ReadOnlyRow";
 import EditableRow from "../EditableRow/EditableRow";
@@ -15,7 +16,7 @@ const ChildsPage = ()=>{
   const [change, setChange] = useState(false);
   const user = useSelector(store=>store.user);
   const [currentSymptoms,setSymptoms] = useState("");
-  const [value, setValue] = React.useState(new Date('2022-01-13T00:00:00.000Z'));
+
   const [childsName,setChildName] = useState("");
   const [diagnosis,setDiagnosis] = useState("");
   useEffect(() => {
@@ -253,7 +254,8 @@ const ChildsPage = ()=>{
                 onChange={(e)=>setSymptoms(e.target.value)}
             />
           </Grid>
-          <Button variant = "contained" color="primary" type="submit">Update</Button>
+          <Button size ="small"
+           variant = "contained" color="primary" type="submit">Update</Button>
           </Grid>
     </form>
   </div>
@@ -298,7 +300,6 @@ const addMedication = ()=>{
             <TextField
                 required
                 fullWidth
-                multiline
                 color="secondary"
                 variant="outlined"
                 type='time'
@@ -317,9 +318,10 @@ const childInfo = ()=>{
   if (!child.loading && child.child.length){
   
    return(
-     <><h1>Child's Name {child.child[0].childsName}
+    <><Typography textAlign={"center"} variant="h4">Child's Name: {child.child[0].childsName}</Typography>
        
-       </h1><h1>Diagnosis {child.child[0].diagnosis}</h1><h1>Symptoms {child.child[0].currentSymptoms}</h1></>
+       <Typography textAlign={"left"} variant="h4">Diagnosis: {child.child[0].diagnosis}</Typography>
+       <Typography textAlign={"left"} variant="h4">Symptoms: {child.child[0].currentSymptoms}</Typography></>
 
    )
     
