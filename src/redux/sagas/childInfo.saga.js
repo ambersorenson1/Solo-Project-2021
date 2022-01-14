@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import swal from 'sweetalert'
 
 
 
@@ -102,7 +103,6 @@ function* UpdateChild(action) {
       url: `/api/children/${action.payload.id}`,
       data: action.payload
     })
-
    console.log("child updated",response.data);
   } catch(err) {
     console.error('UPDATE CHILD ERROR', err)

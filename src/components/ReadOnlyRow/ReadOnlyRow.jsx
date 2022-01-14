@@ -25,7 +25,7 @@ const user = useSelector(store=>store.user);
         startIcon ={<DeleteOutlinedIcon />}
         variant="contained" 
         color="secondary"  
-        nClick={() => handleDeleteClick(medication)}>
+        onClick={() => handleDeleteClick(medication)}>
         Delete
         </Button>
       </td>}
