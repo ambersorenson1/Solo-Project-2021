@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from '@material-ui/core/Button'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 import ReadOnlyRow from "../ReadOnlyRow/ReadOnlyRow";
 import EditableRow from "../EditableRow/EditableRow";
@@ -207,7 +208,8 @@ const ChildsPage = ()=>{
     return(
 
       <><div>
-      <h2>Update Child's Information</h2>
+      <Typography textAlign={"center"} variant="h4"> Update Child's Information </Typography>
+      <br></br>
       <form onSubmit={handleUpdateChildInfoSubmit}>
         <Grid container spacing={1}>        
           <Grid item xs={3}>
@@ -251,8 +253,8 @@ const ChildsPage = ()=>{
                 onChange={(e)=>setSymptoms(e.target.value)}
             />
           </Grid>
+          <Button variant = "contained" color="primary" type="submit">Update</Button>
           </Grid>
-      <Button variant = "contained" color="primary" type="submit">Update</Button>
     </form>
   </div>
   <div>
@@ -264,7 +266,8 @@ const ChildsPage = ()=>{
 const addMedication = ()=>{
   if (user.role==1){
     return(
-      <div><h2>Add a Medication</h2>
+      <div>
+      <Typography textAlign={"center"} variant="h4">Add a Medication</Typography>
       <form onSubmit={handleAddFormSubmit}>
       <Grid container spacing={1}> 
       <Grid item xs={4}>
@@ -307,7 +310,6 @@ const addMedication = ()=>{
         <Button variant = "contained" color="primary" type="submit">Add</Button>
       </form>
       </div>
-      
     )
   }
 }

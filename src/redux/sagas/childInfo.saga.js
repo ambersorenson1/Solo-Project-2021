@@ -74,6 +74,7 @@ function* DeleteChildMedications(action) {
       type: 'DELETE_MEDICATION', 
       payload: response.data
     });
+    swal('You have succesfully deleted the medication')
   } catch(err) {
     console.error('DELETE MEDS ERROR', err)
   }
