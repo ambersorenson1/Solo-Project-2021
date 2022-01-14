@@ -268,46 +268,26 @@ const ChildsPage = ()=>{
 const addMedication = ()=>{
   if (user.role==1){
     return(
-      <div>
-      <Typography textAlign={"center"} variant="h4">Add a Medication</Typography>
+      <div><h2>Add a Medication</h2>
       <form onSubmit={handleAddFormSubmit}>
-      <Grid container spacing={1}> 
-      <Grid item xs={4}>
-            <TextField
-                required
-                fullWidth
-                multiline
-                color="secondary"
-                variant="outlined"
-                type='text'
-                label='Enter a medication name...' 
-                onChange={handleAddFormChange}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-                required
-                fullWidth
-                multiline
-                color="secondary"
-                variant="outlined"
-                type='text'
-                label='Enter the dosage amount...' 
-                onChange={handleAddFormChange}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-                required
-                fullWidth
-                color="secondary"
-                variant="outlined"
-                type='time'
-                label='Enter time of medication...' 
-                onChange={handleAddFormChange}
-            />
-          </Grid>
-          </Grid>
+        <input
+          type="text"
+          name="medicationName"
+          required="required"
+          placeholder="Enter a medication name..."
+          onChange={handleAddFormChange} />
+        <input
+          type="text"
+          name="dosage"
+          required="required"
+          placeholder="Enter the dosage amount..."
+          onChange={handleAddFormChange} />
+        <input
+          type="text"
+          name="timeOfMeds"
+          required="required"
+          placeholder="Enter time of medication..."
+          onChange={handleAddFormChange} />
         <Button variant = "contained" color="primary" type="submit">Add</Button>
       </form>
       </div>
