@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useSelector } from "react-redux";
+import Button from '@mui/material/Button'
 const ReadOnlyRow = ({ medication, handleEditClick, handleDeleteClick }) => {
 const user = useSelector(store=>store.user);
   return (
@@ -9,16 +9,12 @@ const user = useSelector(store=>store.user);
       <td>{medication.dosage}</td>
       <td>{medication.timeOfMeds}</td>
       {user.role == 1&& <td>
-        <button
-          type="button"
+        <Button variant="contained" color="secondary"
           onClick={(event) => handleEditClick(event, medication)}
-        >
-          Edit
-
-        </button>
-        <button type="button" onClick={() => handleDeleteClick(medication)}>
+        >Edit</Button>
+        <Button variant="outlined" color="error"  onClick={() => handleDeleteClick(medication)}>
           Delete
-        </button>
+        </Button>
       </td>}
     </tr>
   );

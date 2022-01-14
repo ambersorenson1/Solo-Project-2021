@@ -1,6 +1,8 @@
 import React, { useState,Fragment, Children } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nanoid } from "nanoid";
+import Button from '@material-ui/core/Button'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
 
 import ReadOnlyRow from "../ReadOnlyRow/ReadOnlyRow";
 import EditableRow from "../EditableRow/EditableRow";
@@ -206,31 +208,50 @@ const ChildsPage = ()=>{
       <><div>
       <h2>Update Child's Information</h2>
       <form onSubmit={handleUpdateChildInfoSubmit}>
-      <input
-        defaultValue={child.child[0].childsName}
-        type="text"
-        name="ChildsName"
-        required="required"
-        placeholder="Enter child's name..."
-        value={childsName}
-        onChange={(e)=>setChildName(e.target.value)} />
-      <input
-        defaultValue={child.child[0].diagnosis}
-        type="text"
-        name="Diagnosis"
-        value={diagnosis}
-        required="required"
-        placeholder="Enter child's diagnosis..."
-        onChange={(e)=>setDiagnosis(e.target.value)} />
-      <input
-       defaultValue={child.child[0].currentSymptoms}
-        type="text"
-        name="currentSymptoms"
-        required="required"
-        value={currentSymptoms}
-        placeholder="Enter any current symptoms..."
-        onChange={(e)=>setSymptoms(e.target.value)} />
-      <button type="submit">Update</button>
+        <Grid container spacing={2}>        
+          <Grid item xs={3}>
+            <TextField
+                defaultValue={child.child[0].childsName}
+                required
+                fullWidth
+                color="secondary"
+                variant="outlined"
+                type='text'
+                label='Enter Child Name' 
+                value={childsName} 
+                onChange={(e)=>setChildName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+                defaultValue={child.child[0].diagnosis}
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="outlined"
+                type='text'
+                label='=Enter Child Diagnosis ' 
+                value={diagnosis} 
+                onChange={(e)=>setDiagnosis(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+                defaultValue={child.child[0].currentSymptoms}
+                required
+                fullWidth
+                multiline
+                color="secondary"
+                variant="outlined"
+                type='text'
+                label='Enter any Current Symptoms' 
+                value={currentSymptoms} 
+                onChange={(e)=>setSymptoms(e.target.value)}
+            />
+          </Grid>
+          </Grid>
+      <Button variant = "contained" color="primary" type="submit">Update</Button>
     </form>
   </div>
   <div>
@@ -261,9 +282,10 @@ const addMedication = ()=>{
           required="required"
           placeholder="Enter time of medication..."
           onChange={handleAddFormChange} />
-        <button type="submit">Add</button>
+        <Button variant = "contained" color="primary" type="submit">Add</Button>
       </form>
       </div>
+      
     )
   }
 }

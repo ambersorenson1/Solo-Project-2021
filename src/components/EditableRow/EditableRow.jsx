@@ -1,4 +1,8 @@
 import React from "react";
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import SaveIcon from '@material-ui/icons/Save'
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 
 const EditableRow = ({
   editFormData,
@@ -6,7 +10,9 @@ const EditableRow = ({
   handleCancelClick,
 }) => {
   return (
-    <tr>
+    <Box
+      height={800}
+    >
       <td>
         <input
           type="text"
@@ -38,12 +44,18 @@ const EditableRow = ({
         ></input>
       </td>
       <td>
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>
-          Cancel
-        </button>
+        <Button 
+        startIcon={<SaveIcon />}
+        variant = "contained" 
+        color="primary" 
+        type="submit">
+          Save
+        </Button>
+        <Button 
+        startIcon={<CancelPresentationIcon />}
+        variant="outlined" color="error" onClick={handleCancelClick}>Cancel</Button>
       </td>
-    </tr>
+    </Box>
   );
 };
 
