@@ -1,4 +1,25 @@
 th, td {
   padding: 8px;
   text-align: left;
+  background-color: #41c5e6;
+  border-radius: 10px;
+  border-style: inset;
+}
+.input {
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: .75em 2em;
+    background-color: c4c4c4;
+    border: 2px solid;
+    border-radius: 12px;
+}
+
+.form {
+  border-style: inset;
+  border-radius: 10px;
+}
+
+.class{
+  color: blue;
 }

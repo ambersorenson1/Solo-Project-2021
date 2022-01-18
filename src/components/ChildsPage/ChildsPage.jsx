@@ -19,6 +19,13 @@ const ChildsPage = ()=>{
 
   const [childsName,setChildName] = useState("");
   const [diagnosis,setDiagnosis] = useState("");
+  useEffect(()=>{
+    if(child.child.length){
+      setChildName(child.child[0].childsName)
+      setDiagnosis(child.child[0].diagnosis)
+      setSymptoms(child.child[0].currentSymptoms)
+    }
+  },[child])
   useEffect(() => {
     dispatch({
       type:'FETCH_MED',
@@ -28,13 +35,6 @@ const ChildsPage = ()=>{
     })
    
   }, [change]);
-  useEffect(()=>{
-    if(child.child.length){
-      setChildName(child.child[0].childsName)
-      setDiagnosis(child.child[0].diagnosis)
-      setSymptoms(child.child[0].currentSymptoms)
-    }
-  },[child])
   const [medications, setMedications] = useState(medication);
   const dispatch = useDispatch();
   const [addFormData, setAddFormData] = useState({
@@ -177,7 +177,6 @@ const ChildsPage = ()=>{
             <h2>Add Child's Information</h2>
             <form onSubmit={(e)=>handleAddChildInfoSubmit(e,true)}>
             <input
-              
               type="text"
               name="ChildsName"
               required="required"
@@ -198,7 +197,7 @@ const ChildsPage = ()=>{
               value={currentSymptoms}
               placeholder="Enter any current symptoms..."
               onChange={(e)=>setSymptoms(e.target.value)} />
-            <button type="submit">Add</button>
+            <Button variant = "contained" color="primary" type="submit">Add</Button>
           </form>
         </div>
         <div>
@@ -219,7 +218,7 @@ const ChildsPage = ()=>{
                 required
                 fullWidth
                 color="secondary"
-                variant="outlined"
+                variant="filled"
                 type='text'
                 label='Enter Child Name' 
                 value={childsName} 
@@ -233,7 +232,7 @@ const ChildsPage = ()=>{
                 fullWidth
                 multiline
                 color="secondary"
-                variant="outlined"
+                variant="filled"
                 type='text'
                 label='=Enter Child Diagnosis ' 
                 value={diagnosis} 
@@ -247,7 +246,7 @@ const ChildsPage = ()=>{
                 fullWidth
                 multiline
                 color="secondary"
-                variant="outlined"
+                variant="filled"
                 type='text'
                 label='Enter any Current Symptoms' 
                 value={currentSymptoms} 
@@ -268,21 +267,24 @@ const ChildsPage = ()=>{
 const addMedication = ()=>{
   if (user.role==1){
     return(
-      <div><h2>Add a Medication</h2>
+      <div><Typography textAlign={"center"} variant="h4">Add a Medication</Typography>
       <form onSubmit={handleAddFormSubmit}>
-        <input
+      <input
+          class = "input"
           type="text"
           name="medicationName"
           required="required"
           placeholder="Enter a medication name..."
           onChange={handleAddFormChange} />
         <input
+          class = "input"
           type="text"
           name="dosage"
           required="required"
           placeholder="Enter the dosage amount..."
           onChange={handleAddFormChange} />
-        <input
+        <input 
+          class = "input"
           type="text"
           name="timeOfMeds"
           required="required"
@@ -298,10 +300,10 @@ const childInfo = ()=>{
   if (!child.loading && child.child.length){
   
    return(
-    <><Typography textAlign={"center"} variant="h4">Child's Name: {child.child[0].childsName}</Typography>
+    <><Typography textAlign={"center"} sx={{ fontWeight: 'bold', fontFamily: 'Monospace',letterSpacing: 5, fontSize: 'h4.fontSize', backgroundColor: 'white'}} style={{color: 'black'}} variant="h5">Child's Name: {child.child[0].childsName}</Typography>
        
-       <Typography textAlign={"left"} variant="h4">Diagnosis: {child.child[0].diagnosis}</Typography>
-       <Typography textAlign={"left"} variant="h4">Symptoms: {child.child[0].currentSymptoms}</Typography></>
+       <Typography textAlign={"center"} sx={{ fontWeight: 'bold', fontFamily: 'Monospace', letterSpacing: 5, fontSize: 'h4.fontSize', backgroundColor: 'white' }} style={{color: 'black'}} variant="h5">Diagnosis: {child.child[0].diagnosis}</Typography>
+       <Typography textAlign={"center"} sx={{ fontWeight: 'bold', fontFamily: 'Monospace', letterSpacing: 5, fontSize: 'h4.fontSize', backgroundColor: 'white' }} style={{color: 'black'}} variant="h5">Symptoms: {child.child[0].currentSymptoms}</Typography></>
 
    )
     

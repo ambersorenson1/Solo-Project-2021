@@ -9,7 +9,22 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <p>This about page is for anyone to read!</p>
+        <p>Technologies used
+          <br></br>
+          -React
+          <br></br>
+          -Redux
+          <br></br>
+          -Sagas
+          <br></br>
+          -Material UI
+          <br></br>
+          -Node.js
+          <br></br>
+          -Express
+          <br></br>
+          -PostgreSql
+        </p>
       </div>
     </div>
   );

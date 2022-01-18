@@ -4,9 +4,14 @@ body,
   height: 100%;
 }
 
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background-image: url(https://www.vhv.rs/file/max/7/77123_wind-emoji-png.png);
+  border-color: #4ba4ec;
+  border-style: outset;
+  border-width: .75em;
 }
 
 img {
@@ -29,11 +34,11 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #7b68ee;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
-  color: #f8f8f8;
+  background-color: #9370db;
+  color: c4c4c4;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -55,7 +60,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #9400d3;
   text-decoration: none;
 }
 
@@ -63,17 +68,18 @@ Button
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid rgb(3, 3, 3);
   border-radius: 0;
   background: none;
   font: inherit;
+  font-size: 40px;
   color: #444;
 }
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #7b68ee;
+  color: #7b68ee;
 }
 
 /* --------------------------------------------------------------------------------

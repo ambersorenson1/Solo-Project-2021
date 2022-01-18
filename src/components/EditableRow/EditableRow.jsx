@@ -12,6 +12,7 @@ const EditableRow = ({
     <tr>
       <td>
         <input
+          class = "input"
           type="text"
           required="required"
           placeholder="Medication Name..."
@@ -22,6 +23,7 @@ const EditableRow = ({
       </td>
       <td>
         <input
+          class = "input"
           type="text"
           required="required"
           placeholder="Dosage..."
@@ -32,6 +34,7 @@ const EditableRow = ({
       </td>
       <td>
         <input
+          class = "input"
           type="text"
           required="required"
           placeholder="Time Of Meds..."
